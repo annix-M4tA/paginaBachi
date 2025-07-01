@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Alumno</title>
+    <link rel="stylesheet" href="/paginaBachi/css/alumno.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header__content">
+            <div class="admin-header__brand">
+                <img src="/paginaBachi/images/logo.png" alt="Logo" class="admin-header__logo">
+                <h1 class="admin-header__title">Panel Alumno - Prueba</h1>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            <div class="theme-toggle-container">
+                <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+            </div>
+            <nav class="student-nav">
+                <ul class="admin-nav__list">
+                    <li><a href="#profile-section" class="nav-link">Perfil</a></li>
+                    <li><a href="#grades-section" class="nav-link">Calificaciones</a></li>
+                    <li><a href="logout.php" class="logout-button">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="admin-main-content">
+        <section class="admin-section student-section" id="profile-section">
+            <div class="admin-section-header">
+                <h2 class="admin-section-title">Mi Perfil</h2>
+            </div>
+            <div class="student-info">
+                <div class="info-card">
+                    <h3>Nombre Completo</h3>
+                    <p>Alumno de Prueba</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-section student-section" id="grades-section">
+            <div class="admin-section-header">
+                <h2 class="admin-section-title">Mis Calificaciones</h2>
+            </div>
+            <div class="responsive-table">
+                <table class="admin-table student-table">
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Materia</th>
+                            <th>Calificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Grupo">1° A</td>
+                            <td data-label="Materia">Matemáticas</td>
+                            <td data-label="Calificación">8.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="/paginaBachi/js/alumno.js"></script>
+</body>
+</html>

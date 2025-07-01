@@ -1,0 +1,9 @@
+node_modules/
+vendor/
+bundles/flag-icon-css/
+*.log
+*.txt
+.env
+.DS_Store
+login_debug.txt
+login_log.txt

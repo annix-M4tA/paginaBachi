@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Barra Lateral, Responsividad y Tema</title>
+    <!-- Enlace al CSS actualizado -->
+    <link rel="stylesheet" href="css/administrativo.css">
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header__content">
+            <div class="admin-header__brand">
+                <h1 class="admin-header__title">Prueba Admin</h1>
+            </div>
+            <div class="theme-toggle-container">
+                <button class="theme-toggle" aria-label="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <button id="mobileMenuToggle" aria-label="Menú móvil">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <nav class="admin-nav">
+            <ul class="admin-nav__list">
+                <li>
+                    <a href="#" class="admin-nav__link">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="admin-nav__link">
+                        <i class="fas fa-users"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="admin-nav__link">
+                        <i class="fas fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li class="admin-nav__dropdown">
+                    <a href="#" class="admin-nav__link">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                    <div class="admin-nav__dropdown-content">
+                        <a href="#" class="admin-nav__link">Perfil</a>
+                        <a href="#" class="admin-nav__link">Ajustes</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal (solo para dar contexto) -->
+    <main class="admin-main-content">
+        <section class="admin-section">
+            <h2 class="admin-section-title">Contenido de Prueba</h2>
+            <p>Este es un contenido de prueba para verificar la responsividad y el diseño.</p>
+        </section>
+    </main>
+
+    <!-- Enlace al JS actual -->
+    <script src="js/administrativo.js"></script>
+</body>
+</html>
