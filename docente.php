@@ -3,7 +3,7 @@ session_start();
 require 'materias.php';
 require 'conexion.php';
 require_once 'fpdf186/fpdf.php';
-//require_once __DIR__ . '/../fpdf186/fpdf.php'; 
+
 
 // Definir constante de entorno
 define('ENVIRONMENT', 'development'); // Cambiar a 'production' en entorno real
@@ -531,12 +531,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $message = 'Error al guardar las calificaciones';
                 $type = 'error';
                 logMessage("Error al guardar calificaciones: " . $e->getMessage());
+          
+   
             }
-        
-            // Redirección con mensaje
-            logMessage("Redirigiendo con mensaje: '$message', tipo: '$type'");
-            header("Location: docente.php?grupo_calif=$grupoId&parcial=$parcialId#calificaciones-section&message=" . urlencode($message) . "&type=" . urlencode($type));
-            exit();
+              $redirectUrl = "docente.php?grupo_calif=$grupoId&parcial=$parcialId&message=" . urlencode($message) . "&type=" . urlencode($type) . "#calificaciones-section";
+    logMessage("Redirigiendo a: $redirectUrl");
+    header("Location: $redirectUrl");
+    exit();
 
         case 'save_asistencia':
             $grupoId = $_POST['grupo_id'] ?? '';
