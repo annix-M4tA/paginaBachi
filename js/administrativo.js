@@ -1147,6 +1147,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ReporteModule.updateReportLinks(semestre);
         log('INFO', `Semestre seleccionado: ${semestre}`);
     });
+   
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('#sidebar');
+    const navOverlay = document.querySelector('.nav-overlay');
+
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    });
+
+    navOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        navOverlay.classList.remove('active');
+    });
+
 
     const handleGlobalClicks = (e) => {
         const modalBtn = e.target.closest('[data-modal]');
@@ -1214,6 +1229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+
 
     document.addEventListener('click', handleGlobalClicks);
 

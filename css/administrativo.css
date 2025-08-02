@@ -196,15 +196,15 @@ body.modal-open {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    height: var(--header-height);
+    width: 100%;
     z-index: var(--z-index-header);
-    box-shadow: var(--admin-box-shadow);
-    backdrop-filter: blur(8px);
-    overflow: hidden;
+    box-shadow: 0 4px 30px var(--admin-shadow-sm);
+    backdrop-filter: blur(5px);
 }
 
 .admin-header__content {
+    flex-direction: row;
+    display: flex;
     max-width: 1600px;
     margin: 0 auto;
     padding: var(--space-md) var(--space-xl);
@@ -225,30 +225,39 @@ body.modal-open {
     min-width: 0;
 }
 
+
+
 .admin-header__title {
     color: var(--admin-light);
-    font-size: var(--font-size-xl);
-    font-weight: 700;
+    font-size: var(--font-size-xl); /* Ajustado a 1.5rem */
+    font-weight: 600; 
+    text-shadow: 0 2px 4px var(--admin-shadow-sm);
     margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: clamp(120px, 40vw, 300px);
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    padding: var(--space-xs) var(--space-xs);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: var(--admin-radius-sm);
+    display: inline-block;
 }
 
-/* Ajustar el menú dentro del header */
-.admin-header__content .admin-nav {
-    flex-grow: 1;
-    margin-left: var(--space-lg);
+/* Botón Toggle Menú */
+.menu-toggle {
+    display: none;
+    position: relative;
+    top: var(--space-md);
+    left: var(--space-md);
+    z-index: var(--z-index-nav) + 1;
+    background: none;
+    border: none;
+    color: var(--admin-light);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    padding: var(--space-sm);
+    transition: transform var(--admin-transition);
 }
 
-.admin-header__content .admin-nav__list {
-    display: flex;
-    gap: var(--space-md);
-    list-style: none;
-    flex-wrap: wrap;
+.menu-toggle:hover {
+    transform: scale(1.1);
 }
 
 /* Botón Toggle Tema */
@@ -258,6 +267,8 @@ body.modal-open {
     flex-shrink: 0;
     margin-right: var(--space-md);
 }
+
+
 
 /* Botón Toggle Móvil */
 #mobileMenuToggle {
@@ -279,6 +290,53 @@ body.modal-open {
 }
 
 /* ====================== SIDEBAR ====================== */
+/* Barra lateral de navegación */
+#sidebar {
+    position: fixed;
+    top: var(--header-height);
+    right: -100%; /* Oculto inicialmente como en docente-nav */
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background: rgba(0, 0, 0, 0.9); /* Similar a docente-nav en móviles */
+    padding: var(--space-md);
+    z-index: var(--z-index-sidebar);
+    transition: right var(--admin-transition);
+    overflow-y: auto;
+ display: none; /* Oculto por defecto */
+}
+
+#sidebar.active {
+    right: 0; /* Mostrado al activarse */
+    display: block; /* Mostrado al activarse */
+}
+
+.nav-overlay {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-index-sidebar) - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--admin-transition);
+}
+
+#sidebar.active + .nav-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.admin-nav__list {
+    display: flex !important; /* Forzar horizontal */
+    flex-direction: row !important; /* Garantizar horizontal */
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    justify-content: space-evenly;
+   
+}
 .admin-sidebar {
     position: fixed;
     top: var(--header-height);
@@ -296,7 +354,41 @@ body.modal-open {
 .admin-sidebar.active {
     left: 0;
 }
+.admin-sidebar .admin-nav__list {
+    flex-direction: column !important;
+    align-items: center;
+}
 
+.admin-sidebar .admin-tab-link {
+    width: 100%;
+    padding: var(--space-md) var(--space-md);
+    border-bottom: 1px solid var(--admin-light);
+}
+
+.nav-overlay {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-index-sidebar) - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--admin-transition);
+}
+
+#sidebar.active + .nav-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+@media (min-width: 769px) {
+    .admin-sidebar {
+        left: 0; /* Mostrar por defecto en escritorio */
+    }
+    
+}
 .menu-toggle {
     display: none;
     background: var(--admin-secondary);
@@ -318,18 +410,12 @@ body.modal-open {
 /* ====================== NAVEGACIÓN ====================== */
 .admin-nav {
     display: flex;
-    flex-direction: column; /* Aseguro que los ítems se apilen verticalmente en la sidebar */
+     flex-grow: 1;
+    margin-left: var(--space-lg);
     gap: var(--space-md);
 }
 
-.admin-nav__list {
-    display: flex;
-    flex-direction: column; /* Vertical para la sidebar */
-    gap: var(--space-md);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+
 
 .admin-nav__link {
     color: var(--admin-light);
@@ -345,10 +431,33 @@ body.modal-open {
     line-height: 1.5;
     opacity: 1; /* Aseguro visibilidad */
 }
+.admin-nav__link span {
+    opacity: 1; /* Asegurar visibilidad del texto */
+}
+
+body.dark-mode .admin-nav__link {
+    color: var(--admin-text-dark); /* Ajuste para modo oscuro */
+}
+
+.admin-nav__link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.admin-nav__link.active {
+    background: var(--admin-secondary);
+    color: var(--admin-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 .admin-nav__link i {
     font-size: var(--font-size-lg);
     min-width: 24px; /* Espacio para íconos */
+}
+
+/* Desplegables */
+.admin-nav__dropdown {
+    position: relative;
 }
 
 .admin-nav__link span {
@@ -399,23 +508,20 @@ body.dark-mode .admin-nav__link {
 /* Menú Móvil */
 @media (max-width: 768px) {
     .menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
     }
 
-    #mobileMenuToggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    #sidebar {
+        display: block; /* Habilitar barra lateral en móviles */
+        right: -100%;
+    }
+
+    #sidebar.active {
+        right: 0;
     }
 
     .admin-header__content {
-        padding: var(--space-sm) var(--space-md);
-    }
-
-    .admin-header__content .admin-nav {
-        display: none;
+        padding: 0.5rem 1rem;
     }
 
     .admin-header__title {
@@ -423,27 +529,18 @@ body.dark-mode .admin-nav__link {
         max-width: clamp(100px, 50vw, 200px);
     }
 
-    .admin-sidebar .admin-nav {
-        display: flex; /* Aseguro que el nav sea visible en móvil */
-    }
-
     .admin-nav__list {
-        gap: var(--space-lg);
+        flex-direction: column !important; /* Vertical en móviles */
+        align-items: center;
     }
 
-    .admin-nav__link {
+    .admin-tab-link {
         width: 100%;
-        padding: var(--space-md) var(--space-lg);
-        font-size: var(--font-size-lg);
-    }
-
-    .admin-nav__dropdown-content {
-        position: static;
-        box-shadow: none;
-        background: rgba(255, 255, 255, 0.15);
-        padding-left: var(--space-lg);
+        padding: var(--space-md) var(--space-md);
+        border-bottom: 1px solid var(--admin-light);
     }
 }
+  
 
 /* ====================== CONTENIDO PRINCIPAL ====================== */
 .admin-main-content {
@@ -805,13 +902,64 @@ body.dark-mode .admin-table .admin-button {
     display: none;
 }
 
+
+
 .admin-tab-link {
-    color: var(--admin-primary);
+    color: var(--admin-light);
     text-decoration: none;
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--admin-radius-sm);
-    transition: var(--admin-transition);
+    transition: all var(--admin-transition);
+    position: relative;
+    overflow: hidden;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.admin-tab-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--admin-accent), transparent);
+    transition: left 0.5s ease;
+}
+
+.admin-tab-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.admin-tab-link:hover::before {
+    left: 100%;
+}
+
+.admin-tab-link.active {
+    background: rgba(91, 84, 9, 0.15);
+    box-shadow: 0 4px 15px var(--admin-shadow-sm);
+}
+
+.logout-button {
+    background-color: var(--admin-danger);
+    color: var(--admin-light);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--admin-radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--admin-transition);
+    box-shadow: 0 4px 10px var(--admin-shadow-sm);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.logout-button:hover {
+    background-color: #e74c3c;
+    transform: scale(1.05);
 }
 
 body.dark-mode .admin-tab-link {
@@ -1155,6 +1303,42 @@ body.dark-mode .admin-section-title::after {
 }
 
 /* Transiciones modo oscuro/claro */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--admin-bg-dark);
+        color: var(--admin-text-dark);
+    }
+
+    .admin-header {
+        background: linear-gradient(135deg, #a8182f 0%, #001a33 100%);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.05);
+    }
+
+    #sidebar {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .admin-tab-link {
+        color: var(--admin-text-dark);
+        border-bottom-color: var(--admin-text-dark);
+    }
+
+    .admin-tab-link::before {
+        background: linear-gradient(90deg, transparent, #a8182f, transparent);
+    }
+
+    .admin-tab-link:hover {
+        background: rgba(77, 171, 245, 0.2);
+    }
+
+    .logout-button {
+        background-color: #a8182f;
+    }
+
+    .logout-button:hover {
+        background-color: #d32f2f;
+    }
+}
 .dark-mode-transition {
     animation: darkModeIn 0.5s ease forwards;
 }

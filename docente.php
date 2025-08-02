@@ -690,7 +690,8 @@ if (!empty($asistenciasRegistradas)) {
         <div class="header-content">
             <div class="logo-container">
                 <img src="images/logo.jpg" alt="Logo" class="logo-img">
-                <h1 class="docente-title">Panel Docente - <?php echo htmlspecialchars($docenteNombre); ?></h1>
+                <h1 class="docente-title">Panel Docente - 
+                    <?php echo htmlspecialchars($docenteNombre); ?></h1>
                 
             </div>
            

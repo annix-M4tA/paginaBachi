@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-$conexion = new mysqli('localhost', 'erick', '', 'bachillerato');
+$conexion = new mysqli('localhost', 'erick', '', 'bachilleratofin');
 if ($conexion->connect_error) {
     die("Error en la conexión: " . $conexion->connect_error);
 }
@@ -36,7 +36,7 @@ $conexion->close();
     <header class="main-header">
         <div class="header-content">
             <div class="logo-container">
-                <img src="images/logo.png" alt="Logo Escuela" class="logo-img">
+                <img src="images/logo.jpg" alt="Logo Escuela" class="logo-img">
                 <div class="school-name">
                     Bachillerato General<br>
                     Miguel Hidalgo y Costilla
@@ -48,12 +48,9 @@ $conexion->close();
             
             <!-- Navigation menu -->
             <nav class="main-nav" id="main-nav">
-                <a href="index.php" class="nav-link">Inicio</a>
-                
-                
+                 <!-- Menú principal -->
+                <a href="index.php" class="nav-link">Inicio</a>               
                 <a href="avisos.php" class="nav-link active">Avisos</a>
-                
-               
             </nav>
         </div>
     </header>

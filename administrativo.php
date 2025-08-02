@@ -875,30 +875,31 @@ $dashboard_data = [
         <?php echo json_encode(array_column($eventos, null, 'id')); ?>
     </script>
 
-    <div class="admin-container">
-        <header class="admin-header" role="banner">
-            <div class="admin-header__content">
-                <div class="admin-header__brand">
-                    <h1 class="admin-header__title">Panel Administrativo</h1>
-                </div>
-                <nav class="admin-nav">
-                    <ul class="admin-nav__list">
-                        <li><a href="#dashboard" class="admin-tab-link active" data-tab="dashboard">Inicio</a></li>
-                        <li><a href="#usuarios" class="admin-tab-link" data-tab="usuarios">Usuarios</a></li>
-                        <li><a href="#academico" class="admin-tab-link" data-tab="academico">Académico</a></li>
-                        <li><a href="#evaluacion" class="admin-tab-link" data-tab="evaluacion">Evaluación</a></li>
-                        <li><a href="#reportes" class="admin-tab-link" data-tab="reportes">Reportes</a></li>
-                        <li><a href="#eventos" class="admin-tab-link" data-tab="eventos">Eventos</a></li>
-                        <li><a href="#avisos" class="admin-tab-link" data-tab="avisos">Avisos</a></li>
-                        <li><a href="#solicitudes" class="admin-tab-link" data-tab="solicitudes">Solicitudes</a></li>
-                    </ul>
-                </nav>
-                <div class="theme-toggle-container">
-                    <button class="theme-toggle" aria-label="Cambiar tema">🌙</button>
-                </div>
-                <button id="mobileMenuToggle" aria-label="Abrir menú móvil">☰</button>
+<div class="admin-container">
+    <header class="admin-header" role="banner">
+        <div class="admin-header__content">
+            <div class="admin-header__brand">
+                <h1 class="admin-header__title">Panel Administrativo</h1>
             </div>
-        </header>
+            <nav class="admin-nav">
+                <ul class="admin-nav__list">
+                    <li><a href="#dashboard" class="admin-tab-link active" data-tab="dashboard">Inicio</a></li>
+                    <li><a href="#usuarios" class="admin-tab-link" data-tab="usuarios">Usuarios</a></li>
+                    <li><a href="#academico" class="admin-tab-link" data-tab="academico">Académico</a></li>
+                    <li><a href="#evaluacion" class="admin-tab-link" data-tab="evaluacion">Evaluación</a></li>
+                    <li><a href="#reportes" class="admin-tab-link" data-tab="reportes">Reportes</a></li>
+                    <li><a href="#eventos" class="admin-tab-link" data-tab="eventos">Eventos</a></li>
+                    <li><a href="#avisos" class="admin-tab-link" data-tab="avisos">Avisos</a></li>
+                    <li><a href="#solicitudes" class="admin-tab-link" data-tab="solicitudes">Solicitudes</a></li>
+                    <li><a href="logout.php" class="logout-button">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            <div class="theme-toggle-container">
+                <button class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+            </div>
+        </div>
+    </header>
 
         <aside class="admin-sidebar">
             <button class="menu-toggle" aria-label="Alternar barra lateral">➤</button>
