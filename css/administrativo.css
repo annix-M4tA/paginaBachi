@@ -242,7 +242,7 @@ body.modal-open {
 
 /* Botón Toggle Menú */
 .menu-toggle {
-    display: none;
+    display: none !important;
     position: relative;
     top: var(--space-md);
     left: var(--space-md);
@@ -328,6 +328,12 @@ body.modal-open {
     pointer-events: all;
 }
 
+/* Menú horizontal en el header */
+.admin-nav {
+    flex-grow: 1;
+    margin-left: var(--space-lg);
+}
+
 .admin-nav__list {
     display: flex !important; /* Forzar horizontal */
     flex-direction: row !important; /* Garantizar horizontal */
@@ -335,7 +341,7 @@ body.modal-open {
     list-style: none;
     padding: 0;
     justify-content: space-evenly;
-   
+   flex-wrap: wrap; /* Permitir que los elementos se ajusten */
 }
 .admin-sidebar {
     position: fixed;
@@ -388,9 +394,9 @@ body.modal-open {
         left: 0; /* Mostrar por defecto en escritorio */
     }
     
-}
+
 .menu-toggle {
-    display: none;
+  display: block; /* Mostrar botón de menú en escritorio */
     background: var(--admin-secondary);
     color: var(--admin-light);
     width: 42px;
@@ -405,6 +411,7 @@ body.modal-open {
 .menu-toggle:hover {
     background: #3f51b5;
     transform: scale(1.1);
+}
 }
 
 /* ====================== NAVEGACIÓN ====================== */
@@ -507,6 +514,10 @@ body.dark-mode .admin-nav__link {
 
 /* Menú Móvil */
 @media (max-width: 768px) {
+     .admin-nav {
+        display: none; /* Ocultar menú horizontal en móviles */
+    }
+    
     .menu-toggle {
         display: block;
     }
@@ -901,8 +912,6 @@ body.dark-mode .admin-table .admin-button {
 .admin-tab {
     display: none;
 }
-
-
 
 .admin-tab-link {
     color: var(--admin-light);

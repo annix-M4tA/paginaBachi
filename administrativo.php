@@ -901,22 +901,20 @@ $dashboard_data = [
         </div>
     </header>
 
-        <aside class="admin-sidebar">
-            <button class="menu-toggle" aria-label="Alternar barra lateral">➤</button>
-            <nav class="admin-nav">
-                <ul class="admin-nav__list">
-                    <li><a href="#dashboard" class="admin-tab-link active" data-tab="dashboard"><i class="fas fa-home"></i> <span>Inicio</span></a></li>
-                    <li><a href="#usuarios" class="admin-tab-link" data-tab="usuarios"><i class="fas fa-users-cog"></i> <span>Usuarios</span></a></li>
-                    <li><a href="#academico" class="admin-tab-link" data-tab="academico"><i class="fas fa-university"></i> <span>Académico</span></a></li>
-                    <li><a href="#evaluacion" class="admin-tab-link" data-tab="evaluacion"><i class="fas fa-clipboard-check"></i> <span>Evaluación</span></a></li>
-                    <li><a href="#reportes" class="admin-tab-link" data-tab="reportes"><i class="fas fa-chart-pie"></i> <span>Reportes</span></a></li>
-                    <li><a href="#eventos" class="admin-tab-link" data-tab="eventos"><i class="fas fa-calendar-alt"></i> <span>Eventos</span></a></li>
-                    <li><a href="#avisos" class="admin-tab-link" data-tab="avisos"><i class="fas fa-bell"></i> <span>Avisos</span></a></li>
-                    <li><a href="#solicitudes" class="admin-tab-link" data-tab="solicitudes"><i class="fas fa-key"></i> <span>Solicitudes</span></a></li>
-                    <li><a href="logout.php" class="admin-nav__link"><i class="fas fa-sign-out-alt"></i> <span>Cerrar Sesión</span></a></li>
-                </ul>
-            </nav>
-        </aside>
+       <nav id="sidebar" class="admin-sidebar">
+        <div class="nav-overlay"></div>
+        <ul class="admin-nav__list">
+            <li><a href="#dashboard" class="admin-tab-link active" data-tab="dashboard">Inicio</a></li>
+            <li><a href="#usuarios" class="admin-tab-link" data-tab="usuarios">Usuarios</a></li>
+            <li><a href="#academico" class="admin-tab-link" data-tab="academico">Académico</a></li>
+            <li><a href="#evaluacion" class="admin-tab-link" data-tab="evaluacion">Evaluación</a></li>
+            <li><a href="#reportes" class="admin-tab-link" data-tab="reportes">Reportes</a></li>
+            <li><a href="#eventos" class="admin-tab-link" data-tab="eventos">Eventos</a></li>
+            <li><a href="#avisos" class="admin-tab-link" data-tab="avisos">Avisos</a></li>
+            <li><a href="#solicitudes" class="admin-tab-link" data-tab="solicitudes">Solicitudes</a></li>
+            <li><a href="logout.php" class="logout-button">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
 
         <main class="admin-main-content">
             <!-- Dashboard -->

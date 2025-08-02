@@ -1121,6 +1121,25 @@ const ReporteModule = {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('#sidebar');
+    const navOverlay = document.querySelector('.nav-overlay');
+
+    // Verificar que los elementos existan
+    if (menuToggle && sidebar && navOverlay) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+        });
+
+        navOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    } else {
+        console.log('Error: Uno o más elementos no encontrados - menuToggle:', menuToggle, 'sidebar:', sidebar, 'navOverlay:', navOverlay);
+    }
+
     TabModule.init();
     ThemeModule.init();
     DashboardModule.initDashboard();
@@ -1148,19 +1167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         log('INFO', `Semestre seleccionado: ${semestre}`);
     });
    
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('#sidebar');
-    const navOverlay = document.querySelector('.nav-overlay');
-
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-    });
-
-    navOverlay.addEventListener('click', () => {
-        sidebar.classList.remove('active');
-        navOverlay.classList.remove('active');
-    });
+   
 
 
     const handleGlobalClicks = (e) => {
