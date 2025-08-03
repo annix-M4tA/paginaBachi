@@ -204,28 +204,32 @@ if (isset($_GET['error'])) {
     </div>
 </section>
 
-<!-- Contacto Section -->
+<!-- Sección de contacto -->
 <section id="contacto" class="section-contacto">
-    <div class="section-container">
-        <h2 class="section-title">Contacto</h2>
-        <div class="contacto-grid">
-            <div class="contacto-info">
-                <h3>Información de Contacto</h3>
-                <p>Dirección: Av. Principal #123, Ciudad</p>
-                <p>Teléfono: (555) 123-4567</p>
-                <p>Email: ignacioGregorioComonfort@bachillerato.edu.mx</p>
-            </div>
-            <div class="contacto-form">
-                <form>
-                    <input type="text" placeholder="Nombre" required>
-                    <input type="email" placeholder="Correo Electrónico" required>
-                    <textarea placeholder="Tu Mensaje" required></textarea>
-                    <button type="submit">Enviar Mensaje</button>
-                </form>
+        <div class="section-container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <h3>Información de Contacto</h3>
+                    <p>Dirección: Av. Principal #123, Ciudad</p>
+                    <p>Teléfono: (555) 123-4567</p>
+                    <p>Email: ignacioGregorioComonfort@bachillerato.edu.mx</p>
+                </div>
+                <div class="contacto-form">
+                    <form id="contactForm">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" placeholder="Nombre" required>
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+                        <label for="message">Tu Mensaje:</label>
+                        <textarea id="message" name="message" placeholder="Tu Mensaje" required></textarea>
+                        <button type="submit">Enviar Mensaje</button>
+                    </form>
+                    <p id="confirmation"></p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 <!-- Nueva Sección: Convenios Académicos -->
 <section id="uni" class="universities-section">

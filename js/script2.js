@@ -190,7 +190,38 @@ jQuery(document).ready(function($) {
             });
         }
     });
+$(document).ready(function() {
+    $('#contactForm').on('submit', function(e) {
+        e.preventDefault(); // Evita la redirección
+        const form = $(this);
+        const confirmation = $('#confirmation');
+        const formData = new FormData(form[0]);
 
+        $.ajax({
+            url: 'pruebacorreo.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                if (result === 'success') {
+                    confirmation.text('Mensaje enviado con éxito').removeClass('error').addClass('success');
+                    form[0].reset(); // Limpia el formulario
+                } else {
+                    confirmation.text('Error al enviar el mensaje. Por favor, intenta de nuevo.').removeClass('success').addClass('error');
+                }
+                confirmation.show();
+                setTimeout(function() {
+                    confirmation.hide();
+                }, 5000); // Oculta el mensaje después de 5 segundos
+            },
+            error: function() {
+                confirmation.text('Error en la conexión. Revisa tu red.').removeClass('success').addClass('error');
+                confirmation.show();
+            }
+        });
+    });
+});
     $(window).on('scroll', function() {
         const sections = $('section[id]');
         const navLinks = $('.nav-link');
@@ -212,4 +243,7 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+   
+   
 });
