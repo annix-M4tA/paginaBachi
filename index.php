@@ -3,7 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {  
     session_start();  
 }  
-
+//Holas
 // Generar token CSRF si no existe
 if (!isset($_SESSION['csrf_token'])) {  
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  
