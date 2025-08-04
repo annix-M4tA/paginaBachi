@@ -190,6 +190,8 @@ jQuery(document).ready(function($) {
             });
         }
     });
+
+    //Correo
 $(document).ready(function() {
     $('#contactForm').on('submit', function(e) {
         e.preventDefault(); // Evita la redirección
@@ -222,6 +224,8 @@ $(document).ready(function() {
         });
     });
 });
+//
+
     $(window).on('scroll', function() {
         const sections = $('section[id]');
         const navLinks = $('.nav-link');

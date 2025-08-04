@@ -247,9 +247,6 @@ if (isset($_GET['error'])) {
         <?php endif; ?>
     </div>
 </section>
-
-
-
     <!-- Sección de Profesores -->
     <section class="teachers-section">
     <h2 class="section-title">Nuestros Docentes</h2>  
