@@ -1,5 +1,5 @@
 <?php  
-// Iniciar sesión si no está iniciada
+// Iniciar sesión si no está iniciada 2
 if (session_status() == PHP_SESSION_NONE) {  
     session_start();  
 }  
