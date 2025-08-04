@@ -235,9 +235,10 @@ $clases = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 function contarAlumnosGrupo($grupoId, $conexion) {
     $sql = "SELECT COUNT(DISTINCT a.usuario_id) AS total 
             FROM alumnos a 
+            JOIN usuarios u ON a.usuario_id = u.id 
             JOIN semestres s ON a.generacion_id = s.generacion_id 
             JOIN grupos g ON g.semestre_id = s.id 
-            WHERE g.id = ?";
+            WHERE g.id = ? AND u.estado = 'activo'";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $grupoId);
     $stmt->execute();
@@ -266,7 +267,7 @@ function getAsistenciasRegistradas($grupoId, $fecha, $conexion) {
             LEFT JOIN asistencias a ON a.alumno_id = u.id 
                 AND a.grupo_id = ?
                 AND a.fecha = ?
-            WHERE g.id = ?";
+           WHERE g.id = ? AND u.estado = 'activo'";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("isi", $grupoId, $fecha, $grupoId);
     $stmt->execute();
@@ -288,7 +289,7 @@ function getCalificaciones($grupoId, $parcialId, $conexion) {
             JOIN semestres s ON a.generacion_id = s.generacion_id
             JOIN grupos g ON g.semestre_id = s.id
             LEFT JOIN calificaciones c ON a.usuario_id = c.alumno_id AND c.parcial_id = ?
-            WHERE g.id = ?";
+            WHERE g.id = ? AND u.estado = 'activo'";
     
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("iii", $grupoId, $parcialId, $grupoId);
@@ -303,7 +304,7 @@ function getAlumnos($grupoId, $conexion) {
             JOIN usuarios u ON a.usuario_id = u.id 
             JOIN semestres s ON a.generacion_id = s.generacion_id
             JOIN grupos g ON g.semestre_id = s.id 
-            WHERE g.id = ?";
+            WHERE g.id = ? AND u.estado = 'activo'";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $grupoId);
     $stmt->execute();
@@ -321,7 +322,6 @@ function getDetallesGrupo($grupoId, $conexion) {
     $stmt->bind_param("i", $grupoId);
     $stmt->execute();
     $grupo = $stmt->get_result()->fetch_assoc();
-
     if (!$grupo) {
         logMessage("No se encontraron detalles para el grupo $grupoId");
         return null;
@@ -332,12 +332,11 @@ function getDetallesGrupo($grupoId, $conexion) {
             JOIN usuarios u ON a.usuario_id = u.id 
             JOIN semestres s ON a.generacion_id = s.generacion_id
             JOIN grupos g ON g.semestre_id = s.id 
-            WHERE g.id = ?";
+            WHERE g.id = ? AND u.estado = 'activo'";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $grupoId);
     $stmt->execute();
     $grupo['alumnos'] = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
     logMessage("Detalles del grupo $grupoId cargados: " . count($grupo['alumnos']) . " alumnos encontrados");
     return $grupo;
 }
@@ -392,7 +391,7 @@ function getReporte($tipo, $grupoId, $conexion) {
                     AND c2.parcial_id = (SELECT id FROM parciales WHERE grupo_id = g.id AND numero_parcial = 2)
                 LEFT JOIN calificaciones c3 ON a.usuario_id = c3.alumno_id 
                     AND c3.parcial_id = (SELECT id FROM parciales WHERE grupo_id = g.id AND numero_parcial = 3)
-                WHERE g.id = ?
+                WHERE g.id = ? 
                 ORDER BY u.nombre_completo";
         
         $stmt = $conexion->prepare($sql);
@@ -1164,6 +1163,7 @@ if (!empty($asistenciasRegistradas)) {
                         <label for="alumno_obs">Alumno:</label>
                         <select name="alumno_obs" id="alumnoObservacion" onchange="this.form.submit()">
                             <option value="">Selecciona un alumno</option>
+
                             <?php $alumnos = getAlumnos($selectedGrupoObs, $conexion); ?>
                             <?php if (empty($alumnos)): ?>
                                 <option value="">No hay alumnos en este grupo</option>

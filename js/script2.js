@@ -243,7 +243,4 @@ $(document).ready(function() {
             }
         });
     });
-
-   
-   
 });

@@ -116,8 +116,6 @@ if (isset($_GET['error'])) {
                 
     </nav>
 
-  
-
     <!-- Hero Section -->
 <section class="hero" id="hero">
     <div class="hero-overlay"></div>
@@ -220,7 +218,7 @@ if (isset($_GET['error'])) {
                         <label for="name">Nombre:</label>
                         <input type="text" id="name" name="name" placeholder="Nombre" required>
                         <label for="email">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+                        <input type="email" id="email" name="email" placeholder="Ingresa tu Correo Electrónico" required>
                         <label for="message">Tu Mensaje:</label>
                         <textarea id="message" name="message" placeholder="Tu Mensaje" required></textarea>
                         <button type="submit">Enviar Mensaje</button>
@@ -368,9 +366,7 @@ if (isset($_GET['error'])) {
                     Cancelar
                 </button>
             </div>
-        </form>
-
-       
+        </form>      
     </div>
 </div>
 
@@ -390,7 +386,6 @@ if (isset($_GET['error'])) {
             <p>&copy; <?php echo date("Y"); ?> Desarrollado por Erick V. Romero en colaboracion con Annie Mata</p>
         </div>
     </footer>
-
 
 <!-- Enlace al archivo JS -->
 <script src="js/script2.js"></script>
