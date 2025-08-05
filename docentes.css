@@ -841,6 +841,30 @@ body {
     box-shadow: 0 -2px 10px var(--shadow-light);
     z-index: 1000;
 }
+
+.docente-chart-wrapper {
+    width: 600px; /* Tamaño fijo para pantallas grandes */
+    max-width: 100%; /* Evita desbordamiento en pantallas pequeñas */
+    height: 500px; /* Altura fija para mantener consistencia */
+    margin: 20px auto;
+    padding: 15px;
+    background: var(--background-light);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#gradeChart {
+    width: 100% !important; /* Asegura que el canvas ocupe todo el contenedor */
+    height: 100% !important; /* Mantiene la altura del contenedor */
+}
+
+@media (max-width: 768px) {
+    .docente-chart-wrapper {
+        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+        height: 300px; /* Reduce la altura en móviles */
+        padding: 10px;
+    }
+}
 /* ====================== RESPONSIVIDAD Y MODO OSCURO ====================== */
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 1024px) {

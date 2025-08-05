@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 function validateForm(event) {
     console.log('Validando formulario');
     const inputs = document.querySelectorAll('#tablaCalificaciones input[type="number"]');
@@ -43,6 +43,42 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Sidebar no encontrado');
         }
     }
+
+    // Inicialización de la gráfica de calificaciones
+    const gradeStats = window.gradeStats || { aprobados: 0, reprobados: 0 };
+    const gradeChartCanvas = document.getElementById('gradeChart');
+    if (gradeChartCanvas && gradeStats && typeof gradeStats === 'object' && 'aprobados' in gradeStats && 'reprobados' in gradeStats) {
+        console.log('Datos de gradeStats:', gradeStats); // Para depuración
+        new Chart(gradeChartCanvas, {
+            type: 'pie',
+            data: {
+                labels: ['Aprobados ', 'Reprobados'],
+                datasets: [{
+                    data: [parseInt(gradeStats.aprobados) || 0, parseInt(gradeStats.reprobados) || 0],
+                    backgroundColor: ['rgba(76, 175, 80, 0.7)', 'rgba(244, 67, 54, 0.7)'],
+                    borderColor: ['rgba(76, 175, 80, 1)', 'rgba(244, 67, 54, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // Mantener proporción para evitar deformaciones
+                aspectRatio: 1, // Proporción 1:1 para una gráfica circular consistente
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Proporción de Aprobados y Reprobados'
+                    }
+                }
+            }
+        });
+    } else {
+        console.log('No hay datos válidos para la gráfica de calificaciones o el canvas no se encontró');
+    }
+
 
     function setupNavLinks() {
         const navLinks = document.querySelectorAll('.docente-nav .nav-link');
@@ -100,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
 
            // Inicializar eventos para calificaciones
     const table = document.getElementById('tablaCalificaciones');
@@ -269,4 +306,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.search.includes('semestre_finalizado')) {
         showNotification('Semestre finalizado. Revisa el reporte de suma de parciales.', 'success');
     }
+  
 });

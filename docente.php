@@ -297,7 +297,7 @@ function getCalificaciones($grupoId, $parcialId, $conexion) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-
+//Obtener alumnos
 function getAlumnos($grupoId, $conexion) {
     $sql = "SELECT a.usuario_id AS id, u.nombre_completo 
             FROM alumnos a 
@@ -434,6 +434,30 @@ function getObservacion($alumnoId, $grupoId, $conexion) {
         return '';
     }
 }
+//funcion para las estadisticas
+
+//Funcion obtener estadisticas de calificaciones globales
+
+function getGradeStatistics($docenteId, $conexion) {
+    $sql = "SELECT 
+                SUM(CASE WHEN c.total >= 6 THEN 1 ELSE 0 END) AS aprobados,
+                SUM(CASE WHEN c.total < 6 THEN 1 ELSE 0 END) AS reprobados
+         FROM grupos g
+         JOIN semestres s ON g.semestre_id = s.id
+         JOIN alumnos a ON a.generacion_id = s.generacion_id
+         JOIN usuarios u ON a.usuario_id = u.id
+         LEFT JOIN calificaciones c ON a.usuario_id = c.alumno_id
+         JOIN parciales p ON c.parcial_id = p.id
+         WHERE g.docente_id = ? AND u.estado = 'activo'";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $docenteId);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    logMessage("Estadísticas globales de calificaciones para docente $docenteId");
+    return $result ?: ['aprobados' => 0, 'reprobados' => 0];
+}
+
+$gradeStats = getGradeStatistics($docenteId, $conexion);
 
 // Variables para mensajes y datos de formulario
 $message = $_GET['message'] ?? '';
@@ -683,6 +707,7 @@ if (!empty($asistenciasRegistradas)) {
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <title>Panel Docente - <?php echo htmlspecialchars($docenteNombre); ?></title>
     <link rel="stylesheet" href="docentes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header class="docente-header">
@@ -713,6 +738,7 @@ if (!empty($asistenciasRegistradas)) {
     <main class="docente-main">
       
         <!-- Dashboard -->
+
         <section class="docente-section" id="dashboard-section">
             <?php echo "<!-- Depuración: Renderizando Dashboard -->"; logMessage("Renderizando Dashboard"); ?>
             <h2 class="section-title">Dashboard</h2>
@@ -740,7 +766,12 @@ if (!empty($asistenciasRegistradas)) {
                     </tbody>
                 </table>
             </div>
-        </section>
+    <h3>Estadísticas de Calificaciones</h3>
+    <div class="docente-chart-wrapper">
+        <canvas id="gradeChart"></canvas>
+    </div>
+</section>
+
 
   <!-- Calificaciones -->
 <section class="docente-section" id="calificaciones-section">
@@ -1198,7 +1229,9 @@ if (!empty($asistenciasRegistradas)) {
     </footer>
 
 
-
+<script>
+    window.gradeStats = <?php echo json_encode($gradeStats); ?>;
+</script>
     <script src="js/docente.js"></script>
 </body>
 </html>
