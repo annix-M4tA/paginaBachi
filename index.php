@@ -158,7 +158,6 @@ if (isset($_GET['error'])) {
     </div>
 </section>
 
-
 <!-- Nosotros Section -->
 <section id="nosotros" class="section-nosotros">
     <div class="section-container">
@@ -247,10 +246,10 @@ if (isset($_GET['error'])) {
         <?php endif; ?>
     </div>
 </section>
+
     <!-- Sección de Profesores -->
     <section class="teachers-section">
     <h2 class="section-title">Nuestros Docentes</h2>  
-       
         <div class="teachers-grid">
             <?php foreach ($teachers as $teacher): ?>
                 <div class="teacher-card">
